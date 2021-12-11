@@ -1,3 +1,5 @@
+import sys
+
 piezas_bl={
     'torre': chr(0x2656),
     'caballo': chr(0x2658),
@@ -14,11 +16,22 @@ piezas_ne={
     'rey': chr(0x265A),
     'peon': chr(0x265F)
 }
-tablero = []
+#tablero = []
+tablero = [
+    [' ',' ',' ',' ',' ',' ',' ',' '],
+    [' ',' ',' ',' ',' ',' ',' ',' '],
+    [' ',' ',' ',' ',' ',' ',' ',' '],
+    [' ',' ',' ',' ',' ',' ',' ',' '],
+    [' ',' ',' ',' ',' ',' ',' ',' '],
+    [' ',' ',' ',' ',' ',' ',' ',' '],
+    [' ',' ',' ',' ',' ',' ',' ',' '],
+    [' ',' ',' ',' ',' ',' ',' ',' ']
+]
 
 def colocar_negras():
     
     global tablero
+    global piezas_ne
 
     #Colocar piezas negras
     tablero[0][0] = piezas_ne['torre']
@@ -50,23 +63,32 @@ def colocar_blancas():
     for i in range(0,8):
         tablero[6][i]=piezas_bl['peon']
 
-def pintar_tablero():
+def pintar_tablero(f,cont):
 
     global tablero
 
     #Pintar todas las posiciones del tablero
-    print("Tablero:")
-    print("--------")
+    f.write(str(cont))
+    f.write(" Tablero:")
+    f.write("\n")
     for i in range(0,8):
+        f.write(" ")
         for j in range(0,8):
-            print(tablero[i][j],end='')
-        print('')
+            f.write(tablero[i][j])#.encode('utf8'))
+        f.write("\n")
 
 def main():
-    
-    for i in range(0,8):
-        tablero.append(' '*8)
+
+    global tablero
     
     colocar_negras()
     colocar_blancas()
-    pintar_tablero()
+
+    fi = open("Ajedrez.txt","w",encoding='utf-8')
+
+    pintar_tablero(fi,1)
+
+    fi.close()
+
+if __name__ == "__main__":
+    main()
