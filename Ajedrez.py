@@ -77,6 +77,29 @@ def pintar_tablero(f,cont):
             f.write(tablero[i][j])#.encode('utf8'))
         f.write("\n")
 
+def mover_pieza():
+    
+    global tablero
+
+    salir = False
+
+    while(salir==False):
+        print("Que pieza quieres mover?")
+        fila_o= int(input('Fila: '))
+        columna_o= int(input('Columna: '))
+        if(tablero[fila_o][columna_o]==' '):
+            print("Esta casilla esta vacia")
+        else:
+            print("Donde la quieres mover?")
+            fila_d= int(input('Fila: '))
+            columna_d= int(input('Columna: '))
+            if(tablero[fila_d][columna_d]==' '):
+                tablero[fila_d][columna_d]=tablero[fila_o][columna_o]
+                tablero[fila_o][columna_o]=' '
+                salir=True
+            else:
+                print("La casilla esta ocupada")
+
 def main():
 
     global tablero
@@ -87,6 +110,18 @@ def main():
     fi = open("Ajedrez.txt","w",encoding='utf-8')
 
     pintar_tablero(fi,1)
+
+    fin = False
+
+    while(fin==False):
+        quiere_jugar= input('Desea seguir jugando?: ')
+        if(quiere_jugar == "S" or quiere_jugar =="s"):
+            mover_pieza()
+            pintar_tablero(fi,2)
+        elif(quiere_jugar == "N" or quiere_jugar =="n"):
+            fin=True
+        else:
+            print("La respuesta debe ser una S o una N")
 
     fi.close()
 
