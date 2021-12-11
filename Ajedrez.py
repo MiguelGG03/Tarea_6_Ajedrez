@@ -16,11 +16,10 @@ piezas_ne={
 }
 tablero = []
 
-for i in range(0,8):
-    for j in range(0,8):
-        tablero.append(' ')
-
 def colocar_negras():
+    
+    global tablero
+
     #Colocar piezas negras
     tablero[0][0] = piezas_ne['torre']
     tablero[0][1] = piezas_ne['caballo']
@@ -33,3 +32,41 @@ def colocar_negras():
     #Colocar peones negros
     for i in range(0,8):
         tablero[1][i]=piezas_ne['peon']
+    
+def colocar_blancas():
+
+    global tablero
+
+    #Colocar piezas blancas
+    tablero[7][0] = piezas_bl['torre']
+    tablero[7][1] = piezas_bl['caballo']
+    tablero[7][2] = piezas_bl['alfil']
+    tablero[7][3] = piezas_bl['reina']
+    tablero[7][4] = piezas_bl['rey']
+    tablero[7][5] = piezas_bl['alfil']
+    tablero[7][6] = piezas_bl['caballo']
+    tablero[7][7] = piezas_bl['torre']
+    #Colocar peones blancos
+    for i in range(0,8):
+        tablero[6][i]=piezas_bl['peon']
+
+def pintar_tablero():
+
+    global tablero
+
+    #Pintar todas las posiciones del tablero
+    print("Tablero:")
+    print("--------")
+    for i in range(0,8):
+        for j in range(0,8):
+            print(tablero[i][j],end='')
+        print('')
+
+def main():
+    
+    for i in range(0,8):
+        tablero.append(' '*8)
+    
+    colocar_negras()
+    colocar_blancas()
+    pintar_tablero()
