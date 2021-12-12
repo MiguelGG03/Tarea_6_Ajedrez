@@ -3,7 +3,7 @@
 Mi dirección al repositorio de GitHub es la siguiente: 
 [GitHub](https://github.com/migueliiin/Tarea_6_Ajedrez.git)
 
-En este ejercicio el diagrama de flujo es el siguiente:
+En este ejercicio los diagramas de flujo son los siguientes:
 
 ![main](https://user-images.githubusercontent.com/91721552/145723605-f494936f-6640-4370-9214-40d34c4853c4.png)
 
