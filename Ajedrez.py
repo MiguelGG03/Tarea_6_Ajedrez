@@ -63,7 +63,7 @@ def colocar_blancas():
     for i in range(0,8):
         tablero[6][i]=piezas_bl['peon']
 
-def pintar_tablero(f,cont):
+def guardar_tablero(f,cont):
 
     global tablero
 
@@ -100,6 +100,24 @@ def mover_pieza():
             else:
                 print("La casilla esta ocupada")
 
+def pintar_tablero(nombre,mov):
+    fi = open(nombre+".txt","r",encoding='utf-8')
+    impr = False
+
+    while(True):
+        linea = fi.readline()
+        if(str(mov)==linea[0:1]):
+            impr=True
+        if(linea[0:1] != " " and str(mov)!=linea[0:1]):
+            impr=False
+        if(impr==True):
+            print(linea)
+        if not linea:
+            break
+
+    fi.close()
+
+
 def main():
 
     global tablero
@@ -107,23 +125,33 @@ def main():
     colocar_negras()
     colocar_blancas()
 
-    fi = open("Ajedrez.txt","w",encoding='utf-8')
+    nombre= input('Como quieres que se llame el archivo en el que se guarde tu partida?: ')
 
-    pintar_tablero(fi,1)
+    fi = open(nombre+".txt","w",encoding='utf-8')
+
+    guardar_tablero(fi,1)
 
     fin = False
+    i=2
 
     while(fin==False):
         quiere_jugar= input('Desea seguir jugando?: ')
         if(quiere_jugar == "S" or quiere_jugar =="s"):
             mover_pieza()
-            pintar_tablero(fi,2)
+            guardar_tablero(fi,i)
+            i=i+1
         elif(quiere_jugar == "N" or quiere_jugar =="n"):
             fin=True
         else:
             print("La respuesta debe ser una S o una N")
 
     fi.close()
+    print("--*PARTIDA FINALIZADA*--")
+    mov= int(input('Que movimiento deseas ver?: '))
+    if(mov<i):
+        pintar_tablero(nombre,mov)
+    else:
+        print("Ese  movimiento no existe")
 
 if __name__ == "__main__":
     main()
